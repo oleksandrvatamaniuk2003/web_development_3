@@ -1,0 +1,17 @@
+# Python & Django
+__pycache__/
+*.py[cod]
+db.sqlite3
+venv/
+.env
+
+# PyCharm
+.idea/
+
+# Docker
+.docker_data/
+
+# Node/Vue
+node_modules/
+dist/
+.DS_Store

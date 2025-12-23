@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=movies_db
+      - POSTGRES_USER=movie_admin
+      - POSTGRES_PASSWORD=complex_password_123
+    ports:
+      - "5432:5432"
+
+  backend:
+    build: ./backend
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - ./backend:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    environment:
+      - DB_NAME=movies_db
+      - DB_USER=movie_admin
+      - DB_PASSWORD=complex_password_123
+      - DB_HOST=db
+
+volumes:
+  postgres_data:
